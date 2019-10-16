@@ -1,14 +1,11 @@
-connection: "the_look"
+connection: "thelook_events"
 
 # include all the views
 include: "*.view"
 
-# include all the dashboards
-include: "*.dashboard"
-
 explore: events {
   join: users {
-    type: left_outer
+    type: inner
     sql_on: ${events.user_id} = ${users.id} ;;
     relationship: many_to_one
   }
@@ -16,7 +13,7 @@ explore: events {
 
 explore: inventory_items {
   join: products {
-    type: left_outer
+    type: full_outer
     sql_on: ${inventory_items.product_id} = ${products.id} ;;
     relationship: many_to_one
   }
